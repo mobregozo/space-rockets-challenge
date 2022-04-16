@@ -8,7 +8,7 @@ import { formatDate } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
-
+import FavoriteButton from "./favorite-button";
 const PAGE_SIZE = 12;
 
 export default function Launches() {
@@ -50,6 +50,7 @@ export function LaunchItem({ launch }) {
       as={Link}
       to={`/launches/${launch.flight_number.toString()}`}
       boxShadow="md"
+      aria-label={`flight ${launch.flight_number.toString()}`}
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
@@ -76,9 +77,8 @@ export function LaunchItem({ launch }) {
         objectFit="contain"
         objectPosition="bottom"
       />
-
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
+        <Box d="flex" alignItems="center" justifyContent="space-between">
           {launch.launch_success ? (
             <Badge px="2" variant="solid" variantColor="green">
               Successful
@@ -88,18 +88,21 @@ export function LaunchItem({ launch }) {
               Failed
             </Badge>
           )}
-          <Box
-            color="gray.500"
-            fontWeight="semibold"
-            letterSpacing="wide"
-            fontSize="xs"
-            textTransform="uppercase"
-            ml="2"
-          >
-            {launch.rocket.rocket_name} &bull; {launch.launch_site.site_name}
-          </Box>
+          <FavoriteButton
+            typeOfItem="launch"
+            item={launch}
+            idLabel="flight_number"
+          />
         </Box>
-
+        <Box
+          color="gray.500"
+          fontWeight="semibold"
+          letterSpacing="wide"
+          fontSize="xs"
+          textTransform="uppercase"
+        >
+          {launch.rocket.rocket_name} &bull; {launch.launch_site.site_name}
+        </Box>
         <Box
           mt="1"
           fontWeight="semibold"
