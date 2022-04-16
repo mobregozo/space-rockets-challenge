@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { CustomWrapper } from "../utils/custom-render";
 import LaunchPad from "./launch";
@@ -135,10 +135,19 @@ describe("Launch", () => {
   });
 
   test("renders the name of the mission", () => {
-    screen.getByText(launch.mission_name);
+    expect(screen.getByText(launch.mission_name)).toBeInTheDocument();
   });
+
   test("renders the main image and the gallery with all the images", () => {
     const images = screen.getAllByRole("img");
     expect(images.length).toBe(launch.links.flickr_images.length + 1);
+  });
+
+  test("renders the tooltip only when user hovers the local lauch date", async () => {
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+
+    fireEvent.mouseOver(screen.getByLabelText("local launch time"));
+    const tooltip = await screen.findByRole("tooltip")
+    expect(tooltip).toBeInTheDocument();
   });
 });
