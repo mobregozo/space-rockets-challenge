@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { IconButton } from "@chakra-ui/core";
+import { IconButton } from "@chakra-ui/react";
 import { FavoritesContext } from "../contexts/favourites-context";
 import { Star } from "react-feather";
 
@@ -26,10 +26,10 @@ export default function FavoriteButton({ typeOfItem, item, idLabel }) {
           onClick={(event) => removeFav(event)}
           aria-label="Remove favorite"
           fontSize="20px"
-          variantColor="orange"
+          colorScheme="orange"
           variant="link"
           text="Remove favorite"
-          icon={Star}
+          icon={<Star />}
         />
       ) : (
         <IconButton
@@ -38,7 +38,7 @@ export default function FavoriteButton({ typeOfItem, item, idLabel }) {
           text="Add favorite"
           variant="link"
           fontSize="20px"
-          icon={Star}
+          icon={<Star />}
         />
       )}
     </>

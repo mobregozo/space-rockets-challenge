@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Flex, Text, useDisclosure, Button } from "@chakra-ui/core";
+import { Flex, Text, useDisclosure, Button } from "@chakra-ui/react";
 
 import Launches from "./launches";
 import Launch from "./launch";
@@ -25,7 +25,7 @@ export default function App() {
 }
 
 function NavBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false });
   return (
     <>
       <Flex
@@ -45,7 +45,9 @@ function NavBar() {
         >
           ¡SPACE·R0CKETS!
         </Text>
-        <Button colorScheme='black' onClick={onOpen} variant='outline'> Favorites</Button>
+        <Button colorScheme="black" onClick={onOpen} variant="outline">
+          Favorites
+        </Button>
       </Flex>
       <FavoritesSideBar isOpen={isOpen} onClose={onClose} />
     </>
