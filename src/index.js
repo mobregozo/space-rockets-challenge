@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { FavoritesProvider } from "./contexts/favourites-context";
 
 import App from "./components/app";
 
@@ -10,7 +11,9 @@ ReactDOM.render(
     <Router>
       <ThemeProvider>
         <CSSReset />
-        <App />
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>,

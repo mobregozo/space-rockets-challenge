@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { CustomWrapper } from "../utils/custom-render";
 import LaunchPad from "./launch-pad";
@@ -22,9 +22,23 @@ const launchPadMock = {
 };
 
 describe("LaunchPad", () => {
-  test("renders the location name of the launchpad", async () => {
+  beforeEach(() => {
     useSpaceX.mockReturnValue({ data: launchPadMock });
     render(<LaunchPad />, { wrapper: CustomWrapper });
+  });
+  test("renders the location name of the launchpad", async () => {
     await screen.findByText(launchPadMock.location.name);
+  });
+
+  test("add launchPad to favorite if the star button is pressed, and removes it if pressed again", async () => {
+    expect(screen.queryByLabelText("Remove favorite")).not.toBeInTheDocument();
+    // Add item to favorites
+    fireEvent.click(screen.getByLabelText("Add favorite"));
+    const removeFavorite = await screen.findByLabelText("Remove favorite");
+    expect(removeFavorite).toBeInTheDocument();
+
+    // Remove item from favorites
+    fireEvent.click(removeFavorite);
+    expect(screen.getByLabelText("Add favorite")).toBeInTheDocument();
   });
 });

@@ -1,9 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { CustomWrapper } from "../utils/custom-render";
 import LaunchPads from "./launch-pads";
 import { useSpaceXPaginated } from "../utils/use-space-x";
+import { within } from "@testing-library/dom";
 jest.mock("../utils/use-space-x");
 
 const launchPadsMock = [
@@ -49,21 +50,40 @@ const launchPadsMock = [
   },
 ];
 
-describe.only("LaunchPads", () => {
+describe("LaunchPads", () => {
   beforeEach(() => {
     useSpaceXPaginated.mockReturnValue({ data: launchPadsMock });
+    render(<LaunchPads />, { wrapper: CustomWrapper });
   });
 
   test("renders a heading for every launchpad in the list", () => {
-    render(<LaunchPads />, { wrapper: CustomWrapper });
     const headings = screen.getAllByRole("heading");
     expect(headings.length).toBe(launchPadsMock.length);
   });
 
   test("renders heading with launchpad name", () => {
-    render(<LaunchPads />, { wrapper: CustomWrapper });
     launchPadsMock.forEach((launchpad) => {
       screen.getAllByRole("heading", { name: launchpad.name });
     });
+  });
+
+  test("add one launchPad to favorites and removes it if pressed again", async () => {
+    const firstItem = screen.getByLabelText(
+      `site ${launchPadsMock[0].site_id}`
+    );
+    const addFavorite = within(firstItem).getByLabelText("Add favorite");
+
+    // Add first launchpad to favorites
+    fireEvent.click(addFavorite);
+    const removeFavorite = await within(firstItem).findByLabelText(
+      "Remove favorite"
+    );
+    expect(removeFavorite).toBeInTheDocument();
+
+    // Remove first launchpad from favorites
+    fireEvent.click(removeFavorite);
+    expect(
+      within(firstItem).getByLabelText("Add favorite")
+    ).toBeInTheDocument();
   });
 });

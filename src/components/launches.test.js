@@ -1,9 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { CustomWrapper } from "../utils/custom-render";
 import Launches from "./launches";
 import { useSpaceXPaginated } from "../utils/use-space-x";
+import { within } from "@testing-library/dom";
 jest.mock("../utils/use-space-x");
 
 const launchesMock = [
@@ -376,27 +377,45 @@ const launchesMock = [
   },
 ];
 
-describe.only("Launches", () => {
+describe("Launches", () => {
   beforeEach(() => {
     useSpaceXPaginated.mockReturnValue({ data: launchesMock });
+    render(<Launches />, { wrapper: CustomWrapper });
   });
 
   test("renders a heading for every launch in the list", () => {
-    render(<Launches />, { wrapper: CustomWrapper });
     const headings = screen.getAllByRole("heading");
     expect(headings.length).toBe(launchesMock.length);
   });
 
   test("renders the two img for every launch, the small and big version", () => {
-    render(<Launches />, { wrapper: CustomWrapper });
     const images = screen.getAllByRole("img");
     expect(images.length).toBe(launchesMock.length * 2);
   });
 
   test("renders heading with launch name", () => {
-    render(<Launches />, { wrapper: CustomWrapper });
     launchesMock.forEach((launch) => {
       screen.getAllByRole("heading", { name: launch.name });
     });
+  });
+
+  test("add one launch to favorites and removes it if pressed again", async () => {
+    const firstItem = screen.getByLabelText(
+      `flight ${launchesMock[0].flight_number.toString()}`
+    );
+    const addFavorite = within(firstItem).getByLabelText("Add favorite");
+
+    // Add first launch to favorites
+    fireEvent.click(addFavorite);
+    const removeFavorite = await within(firstItem).findByLabelText(
+      "Remove favorite"
+    );
+    expect(removeFavorite).toBeInTheDocument();
+
+    // Remove first launch from favorites
+    fireEvent.click(removeFavorite);
+    expect(
+      within(firstItem).getByLabelText("Add favorite")
+    ).toBeInTheDocument();
   });
 });

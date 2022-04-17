@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge, Box, SimpleGrid, Text } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-
+import FavoriteButton from "./favorite-button";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
@@ -41,19 +41,21 @@ export default function LaunchPads() {
   );
 }
 
-function LaunchPadItem({ launchPad }) {
+export function LaunchPadItem({ launchPad }) {
   return (
     <Box
       as={Link}
       to={`/launch-pads/${launchPad.site_id}`}
       boxShadow="md"
       borderWidth="1px"
+      aria-label={`site ${launchPad.site_id}`}
       rounded="lg"
       overflow="hidden"
       position="relative"
+      style={{ flexGrow: "1" }}
     >
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
+        <Box d="flex" alignItems="center" justifyContent="space-between">
           {launchPad.status === "active" ? (
             <Badge px="2" variant="solid" variantColor="green">
               Active
@@ -63,19 +65,22 @@ function LaunchPadItem({ launchPad }) {
               Retired
             </Badge>
           )}
-          <Box
-            color="gray.500"
-            fontWeight="semibold"
-            letterSpacing="wide"
-            fontSize="xs"
-            textTransform="uppercase"
-            ml="2"
-          >
-            {launchPad.attempted_launches} attempted &bull;{" "}
-            {launchPad.successful_launches} succeeded
-          </Box>
+          <FavoriteButton
+            typeOfItem="launchPad"
+            item={launchPad}
+            idLabel="site_id"
+          />
         </Box>
-
+        <Box
+          color="gray.500"
+          fontWeight="semibold"
+          letterSpacing="wide"
+          fontSize="xs"
+          textTransform="uppercase"
+        >
+          {launchPad.attempted_launches} attempted &bull;{" "}
+          {launchPad.successful_launches} succeeded
+        </Box>
         <Box
           mt="1"
           fontWeight="semibold"

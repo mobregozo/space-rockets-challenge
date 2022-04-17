@@ -147,7 +147,20 @@ describe("Launch", () => {
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByLabelText("local launch time"));
-    const tooltip = await screen.findByRole("tooltip")
+    const tooltip = await screen.findByRole("tooltip");
     expect(tooltip).toBeInTheDocument();
+  });
+
+  test("add launch to favorite if the star button is pressed, and removes it if pressed again", async () => {
+    expect(screen.queryByLabelText("Remove favorite")).not.toBeInTheDocument();
+
+    // Add item to favorites
+    fireEvent.click(screen.getByLabelText("Add favorite"));
+    const removeFavorite = await screen.findByLabelText("Remove favorite");
+    expect(removeFavorite).toBeInTheDocument();
+
+    // Remove item from favorites
+    fireEvent.click(removeFavorite); 
+    expect(screen.getByLabelText("Add favorite")).toBeInTheDocument();
   });
 });
