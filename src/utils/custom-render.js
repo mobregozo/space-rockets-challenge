@@ -1,13 +1,12 @@
 import React from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/react/dist";
+import { ChakraProvider } from "@chakra-ui/react";
 import { MemoryRouter } from "react-router-dom";
 import { FavoritesProvider } from "./../contexts/favourites-context";
 
 export const CustomWrapper = ({ children }) => (
   <MemoryRouter>
-    <ThemeProvider>
-      <CSSReset />
+    <ChakraProvider>
       <FavoritesProvider>{children}</FavoritesProvider>
-    </ThemeProvider>
+    </ChakraProvider>
   </MemoryRouter>
 );
