@@ -9,12 +9,12 @@ import {
   Box,
   Accordion,
   AccordionItem,
-  AccordionHeader,
+  AccordionButton,
   AccordionPanel,
   AccordionIcon,
   SimpleGrid,
   IconButton,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import { LaunchItem } from "./launches";
 import { LaunchPadItem } from "./launch-pads";
@@ -41,12 +41,14 @@ export default function FavoritesSideBar({ isOpen, onClose }) {
               border="0"
               isDisabled={favorites.launch.length === 0}
             >
-              <AccordionHeader border="0">
-                <Box flex="1" textAlign="left">
-                  Launches ({favorites.launch.length})
-                </Box>
-                <AccordionIcon />
-              </AccordionHeader>
+              <h2>
+                <AccordionButton border="0">
+                  <Box flex="1" textAlign="left">
+                    Launches ({favorites.launch.length})
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
               <AccordionPanel pb={4}>
                 <SimpleGrid spacingY={5}>
                   {favorites.launch.map((launch) => (
@@ -56,13 +58,13 @@ export default function FavoritesSideBar({ isOpen, onClose }) {
                       key={launch.flight_number}
                     >
                       <IconButton
-                        icon={X}
+                        icon={<X size="1rem" />}
                         position="absolute"
                         aria-label="remove launch"
                         zIndex={1}
-                        right={-2}
-                        top={-8}
-                        size="sm"
+                        right={2}
+                        top={2}
+                        size="xs"
                         rounded="50%"
                         onClick={() =>
                           removeFavorite("launch", launch, "flight_number")
@@ -78,12 +80,14 @@ export default function FavoritesSideBar({ isOpen, onClose }) {
               border="0"
               isDisabled={favorites.launchPad.length === 0}
             >
-              <AccordionHeader>
-                <Box flex="1" textAlign="left">
-                  LaunchPads ({favorites.launchPad.length})
-                </Box>
-                <AccordionIcon />
-              </AccordionHeader>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    LaunchPads ({favorites.launchPad.length})
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
               <AccordionPanel pb={4}>
                 <SimpleGrid spacingY={5} gridAutoFlow="row dense">
                   {favorites.launchPad.map((launchPad) => (
@@ -93,14 +97,14 @@ export default function FavoritesSideBar({ isOpen, onClose }) {
                       key={launchPad.site_id}
                     >
                       <IconButton
-                        icon={X}
+                        icon={<X size="1rem" />}
                         position="absolute"
                         aria-label="remove launchpad"
                         zIndex={1}
-                        right={-2}
-                        top={-8}
+                        right={2}
+                        top={2}
                         rounded="50%"
-                        size="sm"
+                        size="xs"
                         onClick={() =>
                           removeFavorite("launchPad", launchPad, "site_id")
                         }

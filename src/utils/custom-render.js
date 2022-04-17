@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core/dist";
+import { ThemeProvider, CSSReset } from "@chakra-ui/react/dist";
 import { MemoryRouter } from "react-router-dom";
 import { FavoritesProvider } from "./../contexts/favourites-context";
 
