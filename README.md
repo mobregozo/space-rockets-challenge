@@ -2,6 +2,40 @@
 
 # ¡Space·Rockets! app
 
+[DEMO](https://ephemeral-dodol-c55846.netlify.app/)
+
+This represents of the latest state of the challenge.
+
+## Challenge
+
+I have completed a total of 4 Pull Requests.
+
+[PR#1 Testing Setup](https://github.com/mobregozo/space-rockets-challenge/pull/1) - Add testing setup. I did this first in order to make the testing coverage incremental as I was developing the others tasks.
+
+[PR#2 Task 1](https://github.com/mobregozo/space-rockets-challenge/pull/2) - Fix the issue with the launch local dates.
+
+[PR#3 Task 2](https://github.com/mobregozo/space-rockets-challenge/pull/3) - Add "Favorites" new feature to the app.
+
+[PR#4 Task 3](https://github.com/mobregozo/space-rockets-challenge/pull/4) - Update main external libraries.
+
+### Comments and considerations
+
+Some React Javascript files have several components in it, not sure what’s the main reason behind it, but I have noticed some components can be extracted a re-used in different places, which can potentially make the testing easier.
+
+In terms of testing, as I shared on my first PR, it might be worth iterating on doing e2e testing, cover more edge cases for the unit/integration tests, and having some sort of coverage analysis to see where we are.
+
+I have used conventional commits, as it helps me to scope the changes I do.
+
+In terms of the modularity of my technical decisions, I prioritized simplicity over modularising everything just in case we need it in the future. In other words, my approach was, let’s make it simple for now, and we can refactor and abstract functionality if needed.
+
+Some of the questions and comments I have included in the different PRs I would have raised them before working on these items, but to make it as real as possible I decided to leave them there.
+
+Scaffolding of the Chakra UI components could have been improved, as I don’t have much experience with this framework.
+
+Side note: The v3 version of SpaceX API is officially deprecated. This can be updated, but the data has changed a bit, so as the visualization might change I thought it was not the right moment for this, but maybe something you may consider in the future. Plus, based on the documentation, they are not adding more entries to this API.
+
+____
+
 ### [👉 Go to the challenge 👈](./CHALLENGE.md)
 
 ### [🚀 See the app in action 🚀](https://spacerockets.netlify.app)
@@ -13,6 +47,10 @@
 
 - run `yarn` to install dependencies
 - run `yarn start` to start development environment
+
+## Testing
+
+- run `yarn test` to run the tests.
 
 ## Build
 
