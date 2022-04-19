@@ -4,7 +4,7 @@
 
 [DEMO](https://ephemeral-dodol-c55846.netlify.app/)
 
-This represents of the latest state of the challenge.
+This represents the latest state of the challenge.
 
 ## Challenge
 
@@ -20,15 +20,13 @@ I have completed a total of 4 Pull Requests.
 
 ### Comments and considerations
 
-Some React Javascript files have several components in it, not sure what’s the main reason behind it, but I have noticed some components can be extracted a re-used in different places, which can potentially make the testing easier.
-
-In terms of testing, as I shared on my first PR, it might be worth iterating on doing e2e testing, cover more edge cases for the unit/integration tests, and having some sort of coverage analysis to see where we are.
+In terms of testing, as I shared on my first PR, it might be worth iterating on doing e2e testing, covering more edge cases for the unit/integration tests, and having some sort of coverage analysis to see where we are.
 
 I have used conventional commits, as it helps me to scope the changes I do.
 
 In terms of the modularity of my technical decisions, I prioritized simplicity over modularising everything just in case we need it in the future. In other words, my approach was, let’s make it simple for now, and we can refactor and abstract functionality if needed.
 
-Some of the questions and comments I have included in the different PRs I would have raised them before working on these items, but to make it as real as possible I decided to leave them there.
+Some of the questions and comments I have included in the different PRs I would have raised before working on these items, but to make it as real as possible I decided to leave them there.
 
 Scaffolding of the Chakra UI components could have been improved, as I don’t have much experience with this framework.
 
