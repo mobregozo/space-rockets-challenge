@@ -1,7 +1,7 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { MemoryRouter } from "react-router-dom";
-import { FavoritesProvider } from "./../contexts/favourites-context";
+import { FavoritesProvider } from "../contexts/favorites-context";
 
 export const CustomWrapper = ({ children }) => (
   <MemoryRouter>
