@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { IconButton } from "@chakra-ui/react";
-import { FavoritesContext } from "../contexts/favourites-context";
+import { FavoritesContext } from "../contexts/favorites-context";
 import { Star } from "react-feather";
 
 export default function FavoriteButton({ typeOfItem, item, idLabel }) {

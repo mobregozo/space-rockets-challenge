@@ -19,7 +19,7 @@ import {
 import { LaunchItem } from "./launches";
 import { LaunchPadItem } from "./launch-pads";
 import { X } from "react-feather";
-import { FavoritesContext } from "../contexts/favourites-context";
+import { FavoritesContext } from "../contexts/favorites-context";
 
 export default function FavoritesSideBar({ isOpen, onClose }) {
   const { favorites, removeFavorite } = useContext(FavoritesContext);
